@@ -1,0 +1,20 @@
+[project]
+name = "ai-sre-mvp"
+version = "0.1.0"
+description = "AI SRE: pinpoints where the fix belongs and recommends permanent fixes from incident history"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+llm = ["anthropic>=0.40"]
+dev = ["pytest"]
+
+[project.scripts]
+sre-agent = "sre_agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["sre_agent"]

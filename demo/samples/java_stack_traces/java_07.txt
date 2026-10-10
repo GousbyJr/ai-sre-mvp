@@ -1,0 +1,5 @@
+2026-10-08 14:18:42 ERROR com.example.notifications.EmailWorker - Email delivery failed
+javax.mail.MessagingException: SMTP relay closed the connection
+    at com.example.notifications.SmtpClient.send(SmtpClient.java:92)
+    at com.example.notifications.EmailService.deliver(EmailService.java:61)
+    at com.example.notifications.EmailWorker.process(EmailWorker.java:33)

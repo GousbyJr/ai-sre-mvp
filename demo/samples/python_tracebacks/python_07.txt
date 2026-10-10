@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/notifications/worker.py", line 40, in deliver
+    smtp.send_message(message)
+  File "/srv/notifications/smtp_client.py", line 73, in send_message
+    raise OSError("relay disconnected")
+OSError: SMTP relay closed the connection

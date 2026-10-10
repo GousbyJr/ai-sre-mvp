@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/checkout/api.py", line 48, in submit_order
+    return checkout(payload)
+  File "/srv/checkout/service.py", line 27, in checkout
+    discount = coupon["rate"]
+TypeError: 'NoneType' object is not subscriptable

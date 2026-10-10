@@ -21,6 +21,10 @@ class Report:
         return {
             "incident_id": self.incident_id, "signature": self.signature, "analyzer": self.source,
             "error": {"type": self.signal.exc_type, "message": self.signal.message, "service": self.signal.service},
+            "graphql": {
+                "path": self.signal.graphql_path,
+                "code": self.signal.graphql_code,
+            } if self.signal.graphql_path is not None or self.signal.graphql_code is not None else None,
             "history": {"verdict": self.verdict["kind"], "text": self.verdict["text"], "matches": self.matches},
             **self.result,
         }
@@ -37,8 +41,12 @@ class Report:
         o = [
             f"INCIDENT  {s.exc_type}: {s.message}",
             f"  service={s.service or '-'}  signature={self.signature}  incident_id={self.incident_id or '-'}  analyzer={self.source}",
-            "", "WHERE TO FIX", f"  {fl['file']}:{fl['line']}  in {fl['function']}()",
         ]
+        if s.graphql_path is not None:
+            o.append(f"  GraphQL path: {'.'.join(str(part) for part in s.graphql_path)}")
+        if s.graphql_code:
+            o.append(f"  GraphQL code: {s.graphql_code}")
+        o += ["", "WHERE TO FIX", f"  {fl['file']}:{fl['line']}  in {fl['function']}()"]
         loc = self._loc_for(fl)
         if loc:
             for n, t in loc.snippet:

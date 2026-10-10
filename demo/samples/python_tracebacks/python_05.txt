@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/images/worker.py", line 105, in handle
+    create_thumbnail(job["object_key"])
+  File "/srv/images/storage.py", line 44, in download
+    return client.get_object(key)
+ConnectionError: object storage returned HTTP 503

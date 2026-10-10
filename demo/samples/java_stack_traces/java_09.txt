@@ -1,0 +1,5 @@
+2026-10-08 14:27:31 ERROR com.example.auth.TokenFilter - Token validation failed
+io.jsonwebtoken.SignatureException: Signing key does not match token signature
+    at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:402)
+    at com.example.auth.TokenService.decode(TokenService.java:58)
+    at com.example.auth.TokenFilter.authenticate(TokenFilter.java:47)

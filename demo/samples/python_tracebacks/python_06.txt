@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/search/routes.py", line 59, in search
+    return index.query(request.args)
+  File "/srv/search/index.py", line 88, in query
+    return backend.search(filters)
+ValueError: field 'created_at' is not indexed

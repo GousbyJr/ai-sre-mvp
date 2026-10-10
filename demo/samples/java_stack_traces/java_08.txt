@@ -1,0 +1,5 @@
+2026-10-08 14:23:06 ERROR com.example.catalog.CatalogConsumer - Could not decode product message
+com.fasterxml.jackson.core.JsonParseException: Unexpected end-of-input at byte 248
+    at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:2572)
+    at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3912)
+    at com.example.catalog.CatalogConsumer.handle(CatalogConsumer.java:68)

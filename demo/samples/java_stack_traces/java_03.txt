@@ -1,0 +1,5 @@
+2026-10-08 14:05:03 ERROR com.example.inventory.InventoryService - Could not reserve stock
+java.sql.SQLException: Connection pool exhausted
+    at com.example.inventory.ConnectionPool.acquire(ConnectionPool.java:63)
+    at com.example.inventory.InventoryRepository.reserve(InventoryRepository.java:91)
+    at com.example.inventory.InventoryService.reserve(InventoryService.java:48)

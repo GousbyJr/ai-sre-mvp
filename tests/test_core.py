@@ -24,6 +24,25 @@ JAVA = textwrap.dedent('''\
         ... 3 more
 ''')
 
+GRAPHQL = '''{
+  "data": {"user": null},
+  "errors": [{
+    "message": "Cannot read properties of undefined (reading 'email')",
+    "path": ["user", "email"],
+    "extensions": {
+      "code": "INTERNAL_SERVER_ERROR",
+      "exception": {
+        "name": "TypeError",
+        "stacktrace": [
+          "TypeError: Cannot read properties of undefined (reading 'email')",
+          "    at resolveEmail (/srv/app/src/resolvers/user.js:42:11)",
+          "    at executeField (/srv/app/src/graphql/execute.js:88:5)"
+        ]
+      }
+    }
+  }]
+}'''
+
 
 def make_repo(tmp: Path) -> Path:
     (tmp / "svc").mkdir()
@@ -41,6 +60,26 @@ def test_parse_java_root_cause_innermost_last():
     s = parse_log(JAVA)
     assert s.exc_type.endswith("NullPointerException")
     assert s.frames[-1].file == "Inner.java"
+
+
+def test_parse_graphql_json_with_node_stack():
+    signal = parse_log(GRAPHQL, service="users")
+    assert signal.exc_type == "TypeError"
+    assert signal.message == "Cannot read properties of undefined (reading 'email')"
+    assert signal.graphql_path == ["user", "email"]
+    assert signal.graphql_code == "INTERNAL_SERVER_ERROR"
+    assert signal.frames[-1].file == "/srv/app/src/resolvers/user.js"
+    assert signal.frames[-1].line == 42
+    assert signal.frames[-1].func == "resolveEmail"
+
+
+def test_analyze_graphql_log_includes_context(tmp_path):
+    report = analyze(GRAPHQL, tmp_path, use_llm=False)
+    assert report.to_dict()["graphql"] == {
+        "path": ["user", "email"],
+        "code": "INTERNAL_SERVER_ERROR",
+    }
+    assert "GraphQL path: user.email" in report.render()
 
 
 def test_locate_resolves_suffix(tmp_path):

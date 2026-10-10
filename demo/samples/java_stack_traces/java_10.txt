@@ -1,0 +1,9 @@
+2026-10-08 14:31:57 ERROR com.example.orders.OrderWorker - Order transaction failed
+org.springframework.dao.DataAccessResourceFailureException: Could not commit transaction
+    at org.springframework.jdbc.datasource.DataSourceTransactionManager.doCommit(DataSourceTransactionManager.java:335)
+    at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:757)
+Caused by: java.sql.SQLException: Database is locked
+    at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676)
+    at com.example.orders.OrderRepository.save(OrderRepository.java:128)
+    at com.example.orders.OrderWorker.process(OrderWorker.java:81)
+    ... 2 more

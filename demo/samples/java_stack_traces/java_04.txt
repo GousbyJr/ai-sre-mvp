@@ -1,0 +1,5 @@
+2026-10-08 14:08:27 ERROR com.example.profile.ProfileController - Profile update failed
+org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for field 'email'
+    at com.example.profile.ProfileValidator.validate(ProfileValidator.java:35)
+    at com.example.profile.ProfileService.update(ProfileService.java:102)
+    at com.example.profile.ProfileController.update(ProfileController.java:57)

@@ -54,6 +54,10 @@ def history_verdict(matches: list[dict], signature: str) -> dict:
 def build_prompt(signal: Signal, located: list[Located], verdict: dict, matches: list[dict]) -> str:
     p = [f"ERROR: {signal.exc_type}: {signal.message}", f"SERVICE: {signal.service or 'unknown'}",
          "STACK (outermost -> innermost):"]
+    if signal.graphql_path is not None:
+        p.append(f"GRAPHQL PATH: {'.'.join(str(part) for part in signal.graphql_path)}")
+    if signal.graphql_code:
+        p.append(f"GRAPHQL CODE: {signal.graphql_code}")
     p += [f"  {f.file}:{f.line} in {f.func}" for f in signal.frames]
     for l in located:
         p.append(f"\n--- {l.path}:{l.frame.line} in {l.frame.func} ---")

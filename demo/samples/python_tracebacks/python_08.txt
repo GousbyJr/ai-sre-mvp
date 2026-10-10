@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/catalog/consumer.py", line 112, in handle
+    product = json.loads(message.body)
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+json.decoder.JSONDecodeError: Expecting value: line 1 column 249 (char 248)

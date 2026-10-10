@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/orders/worker.py", line 83, in process_message
+    store_order(message["order"])
+  File "/srv/orders/database.py", line 119, in store_order
+    connection.commit()
+sqlite3.OperationalError: database is locked

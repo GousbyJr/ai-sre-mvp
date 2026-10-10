@@ -1,0 +1,5 @@
+2026-10-08 14:03:48 ERROR com.example.payments.PaymentWorker - Charge request failed
+java.net.SocketTimeoutException: Read timed out
+    at com.example.payments.HttpGateway.charge(HttpGateway.java:117)
+    at com.example.payments.PaymentService.process(PaymentService.java:74)
+    at com.example.payments.PaymentWorker.handle(PaymentWorker.java:39)

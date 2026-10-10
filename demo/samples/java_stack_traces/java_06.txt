@@ -1,0 +1,5 @@
+2026-10-08 14:14:19 ERROR com.example.search.SearchService - Search request rejected
+java.lang.IllegalArgumentException: Field 'created_at' is not indexed
+    at com.example.search.SearchIndex.validate(SearchIndex.java:81)
+    at com.example.search.SearchIndex.query(SearchIndex.java:109)
+    at com.example.search.SearchController.search(SearchController.java:44)

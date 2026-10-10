@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/profile/routes.py", line 31, in update_profile
+    return save_profile(request.json)
+  File "/srv/profile/validation.py", line 22, in save_profile
+    email = payload["email"]
+KeyError: 'email'

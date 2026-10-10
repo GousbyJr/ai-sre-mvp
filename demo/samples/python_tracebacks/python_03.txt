@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/srv/inventory/api.py", line 72, in reserve
+    return warehouse.reserve(sku, count)
+  File "/srv/inventory/database.py", line 54, in reserve
+    cursor = connection.cursor()
+  File "/srv/inventory/pool.py", line 63, in acquire
+    raise RuntimeError("pool limit reached")
+RuntimeError: database connection pool exhausted

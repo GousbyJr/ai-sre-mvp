@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/auth/middleware.py", line 67, in authenticate
+    claims = decode_token(token)
+  File "/srv/auth/tokens.py", line 52, in decode_token
+    key = key_store.get(header["kid"])
+KeyError: 'kid'

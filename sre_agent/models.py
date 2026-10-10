@@ -19,6 +19,8 @@ class Signal:
     frames: list[Frame]
     raw: str = ""
     service: Optional[str] = None
+    graphql_path: Optional[list[str | int]] = None
+    graphql_code: Optional[str] = None
 
 
 @dataclass

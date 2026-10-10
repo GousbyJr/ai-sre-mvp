@@ -25,12 +25,37 @@ Close the loop after every incident: `sre-agent resolve <id> --type permanent --
 ## Run
 ```bash
 python demo/run_demo.py                    # crash -> diagnosis -> workaround -> recurrence escalation
+python -m sre_agent.web                    # local browser UI at http://127.0.0.1:8000
+python -m sre_agent.web --repo /path/to/service --port 8080
 pip install -e '.[llm]'                    # optional: LLM analysis
 export ANTHROPIC_API_KEY=...               # without it, rule-based fallback is used
 sre-agent analyze --log error.log --repo /path/to/service --service checkout
 sre-agent resolve 1 --type permanent --root-cause "..." --fix "..."
 sre-agent history
 ```
+
+The web UI binds to localhost only. Paste a GraphQL JSON error response/log, Python traceback, or Java
+stack trace, select the service repository path, and submit it to see the diagnosis and incident-history
+result. GraphQL `errors` entries include their error message, path, extension code, and any Node.js,
+Python, or Java stack trace exposed by the server.
+
+For LLM analysis, install the optional `llm` extra and enter the Anthropic API key in the UI's
+**LLM analysis** section. The key is sent to the localhost server, kept in that server process's
+environment only, and cleared when the server stops; it is not saved to browser storage or disk.
+
+## Sample inputs
+
+`demo/samples/` contains 10 standalone service error-log lines, 10 Python tracebacks, and 10 Java stack
+traces. The standalone lines are examples of log context; the current parser analyzes Python tracebacks
+and Java stack traces, not arbitrary single-line log messages. Analyze a trace at a time:
+
+```powershell
+python -m sre_agent.cli analyze --log demo\samples\python_tracebacks\python_01.txt --repo . --no-llm --no-record
+python -m sre_agent.cli analyze --log demo\samples\java_stack_traces\java_01.txt --repo . --no-llm --no-record
+```
+
+Change the sample number from `01` to `10` to try another trace. The samples use fictional services and
+contain no real credentials or customer data.
 
 ## Next steps
 1. Ingest from Datadog/Loki/CloudWatch/Sentry/PagerDuty webhooks instead of log files

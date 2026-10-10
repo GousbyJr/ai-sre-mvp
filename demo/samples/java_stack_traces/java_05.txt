@@ -1,0 +1,5 @@
+2026-10-08 14:11:54 ERROR com.example.images.ThumbnailWorker - Thumbnail upload failed
+java.io.IOException: Object storage returned HTTP 503
+    at com.example.images.ObjectStore.put(ObjectStore.java:144)
+    at com.example.images.ThumbnailService.create(ThumbnailService.java:76)
+    at com.example.images.ThumbnailWorker.process(ThumbnailWorker.java:52)

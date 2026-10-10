@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/payments/worker.py", line 91, in process
+    charge(card, amount)
+  File "/srv/payments/gateway.py", line 36, in charge
+    response = client.post("/charge", json=data)
+TimeoutError: payment provider did not respond within 5 seconds

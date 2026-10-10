@@ -1,0 +1,5 @@
+2026-10-08 14:02:11 ERROR com.example.checkout.CheckoutService - Failed to apply coupon
+java.lang.NullPointerException: Cannot invoke "Coupon.rate()" because "coupon" is null
+    at com.example.checkout.DiscountService.apply(DiscountService.java:42)
+    at com.example.checkout.CheckoutService.submit(CheckoutService.java:88)
+    at com.example.checkout.CheckoutController.create(CheckoutController.java:51)
